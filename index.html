@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Islam Bouikiri — Photography Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400&family=Caveat:wght@400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --pink:       #f9cdd6;
+      --pink-light: #fdf0f3;
+      --pink-mid:   #f0b4c2;
+      --pink-dark:  #d9849a;
+      --grey-dark:  #2a2a2a;
+      --grey-mid:   #5a5a5a;
+      --grey-light: #9a9a9a;
+      --white:      #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--pink-light);
+      color: var(--grey-dark);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ══════════════════════════════
+       NAV
+    ══════════════════════════════ */
+
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      height: 68px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 52px;
+      background: rgba(253,240,243,0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(249,205,214,0.5);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px;
+      font-weight: 400;
+      letter-spacing: 0.06em;
+      color: var(--grey-dark);
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 300;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+      transition: color 0.25s;
+      padding: 6px 0;
+      position: relative;
+    }
+
+    .nav-btn::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: var(--pink-dark);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .nav-btn:hover        { color: var(--grey-mid); }
+    .nav-btn.active       { color: var(--grey-dark); }
+    .nav-btn.active::after { transform: scaleX(1); }
+
+    /* ══════════════════════════════
+       PAGE SYSTEM
+    ══════════════════════════════ */
+
+    .page {
+      display: none;
+      min-height: calc(100vh - 68px);
+      margin-top: 68px;
+    }
+
+    .page.active {
+      display: block;
+      animation: fadeUp 0.45s cubic-bezier(0.16,1,0.3,1) both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ══════════════════════════════
+       HOME
+    ══════════════════════════════ */
+
+    .home-hero {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: calc(100vh - 68px);
+    }
+
+    .home-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 64px 80px 52px;
+    }
+
+    .home-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+      margin-bottom: 28px;
+    }
+
+    .home-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 5.5vw, 88px);
+      font-weight: 300;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: var(--grey-dark);
+      margin-bottom: 16px;
+    }
+
+    .home-name em {
+      font-style: italic;
+      color: var(--pink-dark);
+      display: block;
+    }
+
+    .home-tagline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 1.6vw, 21px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--grey-mid);
+      margin-bottom: 36px;
+      line-height: 1.5;
+    }
+
+    .home-purpose {
+      font-size: 14px;
+      line-height: 1.95;
+      color: var(--grey-mid);
+      max-width: 440px;
+      margin-bottom: 32px;
+    }
+
+    .home-email {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: var(--grey-mid);
+      text-decoration: none;
+      border-bottom: 1px solid var(--pink);
+      padding-bottom: 2px;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .home-email:hover {
+      color: var(--pink-dark);
+      border-color: var(--pink-dark);
+    }
+
+    .home-scroll {
+      margin-top: 48px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+    }
+
+    .home-scroll::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--pink-mid);
+    }
+
+    .home-photo {
+      position: relative;
+      overflow: hidden;
+      background: var(--pink);
+    }
+
+    .home-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 8s ease;
+    }
+
+    .home-photo:hover img { transform: scale(1.04); }
+
+    /* ══════════════════════════════
+       PORTFOLIO
+    ══════════════════════════════ */
+
+    .page-header {
+      padding: 64px 52px 44px;
+      border-bottom: 1px solid var(--pink);
+      text-align: center;
+    }
+
+    .page-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 4.5vw, 68px);
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .page-title em { font-style: italic; color: var(--pink-dark); }
+
+    .page-sub {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: var(--grey-light);
+    }
+
+    /* scroll-reveal shell */
+    .p-slot {
+      display: flex;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(44px) scale(0.95);
+      transition:
+        opacity   0.75s ease var(--delay,0ms),
+        transform 0.75s cubic-bezier(0.16,1,0.3,1) var(--delay,0ms);
+    }
+
+    .p-slot.visible { opacity: 1; transform: none; }
+
+    .polaroid-grid {
+      padding: 60px 44px 88px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 60px 28px;
+      align-items: start;
+    }
+
+    .polaroid {
+      background: var(--white);
+      width: 200px;
+      padding: 11px 11px 52px;
+      box-shadow:
+        0 1px 4px rgba(0,0,0,0.07),
+        0 6px 20px rgba(0,0,0,0.1);
+      transform: rotate(var(--tilt,0deg));
+      transition:
+        transform  0.45s cubic-bezier(0.23,1,0.32,1),
+        box-shadow 0.4s ease;
+      cursor: pointer;
+    }
+
+    .polaroid:hover {
+      transform: rotate(0deg) scale(1.08) translateY(-10px);
+      box-shadow:
+        0 16px 36px rgba(0,0,0,0.15),
+        0 32px 72px rgba(0,0,0,0.08);
+      position: relative;
+      z-index: 10;
+    }
+
+    .polaroid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    .polaroid-label {
+      font-family: 'Caveat', cursive;
+      font-size: 15px;
+      color: var(--grey-light);
+      text-align: center;
+      padding-top: 10px;
+      min-height: 24px;
+    }
+
+    /* ══════════════════════════════
+       ABOUT ME
+    ══════════════════════════════ */
+
+    .about-top {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 72px;
+      align-items: start;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 72px 52px 80px;
+    }
+
+    .portrait-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .portrait-wrap::before {
+      content: '';
+      position: absolute;
+      top: -18px; left: -18px;
+      right: 18px; bottom: 18px;
+      background: var(--pink);
+      z-index: 0;
+    }
+
+    .portrait-wrap img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-text { padding-top: 4px; }
+
+    .about-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+      margin-bottom: 20px;
+    }
+
+    .about-headline {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 3.5vw, 52px);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 28px;
+    }
+
+    .about-headline em { font-style: italic; color: var(--pink-dark); }
+
+    .about-intro {
+      font-size: 15px;
+      line-height: 1.95;
+      color: var(--grey-mid);
+      margin-bottom: 0;
+    }
+
+    /* artist statement band */
+    .statement-band {
+      background: var(--grey-dark);
+      padding: 80px 52px 88px;
+    }
+
+    .statement-band-inner {
+      max-width: 1080px;
+      margin: 0 auto;
+    }
+
+    .statement-lbl {
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--pink-mid);
+      margin-bottom: 52px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .statement-lbl::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(249,205,214,0.18);
+    }
+
+    .statement-pull {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 2.5vw, 34px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--pink);
+      line-height: 1.3;
+      max-width: 680px;
+      margin-bottom: 60px;
+    }
+
+    .statement-cols {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 48px;
+    }
+
+    .s-col { border-top: 1px solid rgba(249,205,214,0.18); padding-top: 28px; }
+
+    .s-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 40px;
+      font-weight: 300;
+      color: rgba(249,205,214,0.22);
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .s-col p {
+      font-size: 14px;
+      line-height: 1.95;
+      color: rgba(253,240,243,0.68);
+    }
+
+    /* ══════════════════════════════
+       CONTACT
+    ══════════════════════════════ */
+
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 80px 52px 96px;
+    }
+
+    .contact-left-head {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(38px, 4vw, 60px);
+      font-weight: 300;
+      line-height: 1.05;
+      margin-bottom: 20px;
+    }
+
+    .contact-left-head em { font-style: italic; color: var(--pink-dark); }
+
+    .contact-note {
+      font-size: 14px;
+      line-height: 1.9;
+      color: var(--grey-mid);
+    }
+
+    .contact-card {
+      background: var(--white);
+      padding: 48px;
+      box-shadow:
+        0 2px 12px rgba(0,0,0,0.06),
+        0 12px 40px rgba(0,0,0,0.07);
+    }
+
+    .c-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px;
+      font-weight: 300;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+
+    .c-role {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+      margin-bottom: 36px;
+    }
+
+    .c-sep {
+      height: 1px;
+      background: linear-gradient(to right, var(--pink), transparent);
+      margin-bottom: 32px;
+    }
+
+    .c-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 22px;
+    }
+
+    .c-ico {
+      width: 40px; height: 40px;
+      background: var(--pink-light);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .c-lbl {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--grey-light);
+      margin-bottom: 2px;
+    }
+
+    .c-val { font-size: 14px; color: var(--grey-dark); }
+    .c-val a { color: inherit; text-decoration: none; transition: color 0.25s; }
+    .c-val a:hover { color: var(--pink-dark); }
+
+    /* ══════════════════════════════
+       LIGHTBOX
+    ══════════════════════════════ */
+
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0; z-index: 500;
+      background: rgba(42,42,42,0.97);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox.open { display: flex; }
+
+    #lb-img {
+      max-width: 88vw;
+      max-height: 88vh;
+      object-fit: contain;
+      box-shadow: 0 40px 100px rgba(0,0,0,0.55);
+      display: block;
+      cursor: default;
+      transition: opacity 0.14s ease;
+    }
+
+    .lb-close {
+      position: fixed; top: 28px; right: 40px;
+      background: none; border: none;
+      color: var(--pink); font-size: 36px; font-weight: 200;
+      cursor: pointer; line-height: 1; transition: opacity 0.2s;
+    }
+
+    .lb-close:hover { opacity: 0.5; }
+
+    .lb-nav {
+      position: fixed; top: 50%; transform: translateY(-50%);
+      background: none; border: none;
+      color: var(--pink); font-size: 56px; font-weight: 100;
+      cursor: pointer; padding: 20px 16px; line-height: 1;
+      transition: opacity 0.2s;
+    }
+
+    .lb-nav:hover { opacity: 0.5; }
+    .lb-prev { left: 12px; }
+    .lb-next { right: 12px; }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
+
+    footer {
+      background: var(--grey-dark);
+      padding: 28px 52px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid rgba(249,205,214,0.1);
+    }
+
+    .footer-sig {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px;
+      color: var(--pink);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--grey-light);
+      opacity: 0.4;
+      letter-spacing: 0.1em;
+    }
+
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+
+    @media (max-width: 960px) {
+      nav { padding: 0 24px; }
+      .nav-links { gap: 20px; }
+
+      .home-hero { grid-template-columns: 1fr; }
+      .home-photo { height: 65vw; min-height: 280px; }
+      .home-text { padding: 56px 24px 48px; }
+      .home-purpose { max-width: 100%; }
+
+      .page-header { padding: 48px 24px 32px; }
+      .polaroid-grid { padding: 40px 16px 60px; gap: 40px 10px; }
+
+      .about-top { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px 64px; }
+      .portrait-wrap::before { display: none; }
+
+      .statement-band { padding: 64px 24px 72px; }
+      .statement-cols { grid-template-columns: 1fr; gap: 32px; }
+
+      .contact-layout { grid-template-columns: 1fr; gap: 40px; padding: 56px 24px 72px; }
+
+      footer { padding: 24px; flex-direction: column; gap: 8px; }
+    }
+
+    @media (max-width: 540px) {
+      .nav-links { gap: 14px; }
+      .nav-btn { font-size: 10px; letter-spacing: 0.1em; }
+      .polaroid-grid { grid-template-columns: repeat(2,1fr); gap: 32px 8px; }
+      .polaroid { width: 100%; }
+      .contact-card { padding: 32px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <button class="nav-logo" onclick="show('home')">Islam Bouikiri</button>
+  <ul class="nav-links">
+    <li><button class="nav-btn active" data-page="home"      onclick="show('home')">Home</button></li>
+    <li><button class="nav-btn"        data-page="portfolio" onclick="show('portfolio')">Portfolio</button></li>
+    <li><button class="nav-btn"        data-page="about"     onclick="show('about')">About Me</button></li>
+    <li><button class="nav-btn"        data-page="contact"   onclick="show('contact')">Contact</button></li>
+  </ul>
+</nav>
+
+
+<!-- ══ HOME ════════════════════════════════════════ -->
+<section id="home" class="page active">
+  <div class="home-hero">
+
+    <div class="home-text">
+      <p class="home-eyebrow">Photography Portfolio</p>
+
+      <h1 class="home-name">
+        Islam
+        <em>Bouikiri</em>
+      </h1>
+
+      <p class="home-tagline">Finding beauty in what already exists around us</p>
+
+      <p class="home-purpose">
+        This portfolio documents my creative journey through photography — a collection of
+        moments captured with curiosity and intention. Each image was created during my
+        photography course and lab, where I learned to see beauty in the overlooked and
+        meaning in the ordinary. Through these photographs, I invite you to slow down, look
+        closer, and find the quiet stories that exist all around us.
+      </p>
+
+      <a class="home-email" href="mailto:islambouikiri@gmail.com">
+        ✉ &nbsp;islambouikiri@gmail.com
+      </a>
+
+      <p class="home-scroll">scroll to explore</p>
+    </div>
+
+    <div class="home-photo">
+      <img src="my picture/IMG_6200.JPG" alt="Islam Bouikiri" />
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══ PORTFOLIO ════════════════════════════════════ -->
+<section id="portfolio" class="page">
+
+  <div class="page-header">
+    <h2 class="page-title">Selected <em>Work</em></h2>
+    <p class="page-sub" id="photo-count"></p>
+  </div>
+
+  <div class="polaroid-grid" id="polaroid-grid"></div>
+
+</section>
+
+
+<!-- ══ ABOUT ME ═════════════════════════════════════ -->
+<section id="about" class="page">
+
+  <div class="about-top">
+    <div class="portrait-wrap">
+      <img src="my picture/IMG_6200.JPG" alt="Self-portrait — Islam Bouikiri" />
+    </div>
+
+    <div class="about-text">
+      <p class="about-eyebrow">About Me</p>
+      <h2 class="about-headline">Hello, I'm<br /><em>Islam Bouikiri</em></h2>
+      <p class="about-intro">
+        I'm a photography student with a deep curiosity for the world around me. My camera
+        is how I slow down — how I notice what others walk past and find the story hidden in
+        the everyday. Through this course, photography became more than a skill; it became
+        a way of seeing.
+      </p>
+    </div>
+  </div>
+
+  <div class="statement-band">
+    <div class="statement-band-inner">
+      <p class="statement-lbl">Artist Statement</p>
+      <p class="statement-pull">"I like to think of my photographs as frozen memories."</p>
+      <div class="statement-cols">
+
+        <div class="s-col">
+          <div class="s-num">01</div>
+          <p>I like to think of my photographs as frozen memories. I am drawn to capturing ordinary
+          moments, the things we pass by every day without noticing. What motivates me is the idea
+          that there is a unique beauty in everything we encounter on a daily basis, if we simply pause
+          and look closer. Sometimes, when I show my photos to others, they ask where I found such
+          scenes, and I point to places they visit all the time but never stop to admire. Photography, for
+          me, began as a way to slow down and appreciate my surroundings, and over time, it has
+          become a way to reflect more deeply on life and recognize the beauty in what already exists
+          around us.</p>
+        </div>
+
+        <div class="s-col">
+          <div class="s-num">02</div>
+          <p>When I take photos, I try to stay as real as possible. I don't like forcing moments or asking
+          people to act a certain way just to get a "good" picture. I enjoy capturing things as they are —
+          especially when photographing people during events. The best moments, for me, are the
+          spontaneous ones: laughter, nervousness, happiness, feelings that people can look back on
+          and truly recognize. I think those are the images that hold the most meaning. In general, I'm
+          most drawn to simple, everyday scenes that might seem ordinary but can make you stop
+          and reflect.</p>
+        </div>
+
+        <div class="s-col">
+          <div class="s-num">03</div>
+          <p>Right now, I'm exploring photography as a way of telling stories, not just through single
+          images but through a series of them. Working on projects where I had to connect different
+          photos helped me see how moments can come together to create a bigger meaning. It
+          pushed me to think more intentionally about what I capture and why. I want to keep
+          developing this, challenging myself to go beyond individual shots and build something more
+          connected. In the end, I just want my work to reveal meaning in the unnoticed and to
+          encourage people to see the world with greater attention and appreciation.</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ══ CONTACT ═══════════════════════════════════════ -->
+<section id="contact" class="page">
+  <div class="contact-layout">
+
+    <div>
+      <h2 class="contact-left-head">Get in<br /><em>Touch</em></h2>
+      <p class="contact-note">
+        Whether you want to discuss photography, a project, or simply share a thought —
+        I'd love to hear from you.
+      </p>
+    </div>
+
+    <div class="contact-card">
+      <p class="c-name">Islam Bouikiri</p>
+      <p class="c-role">Photographer · Student</p>
+      <div class="c-sep"></div>
+
+      <div class="c-row">
+        <div class="c-ico">✉</div>
+        <div>
+          <p class="c-lbl">Email</p>
+          <p class="c-val"><a href="mailto:islambouikiri@gmail.com">islambouikiri@gmail.com</a></p>
+        </div>
+      </div>
+
+      <div class="c-row">
+        <div class="c-ico">📸</div>
+        <div>
+          <p class="c-lbl">Instagram</p>
+          <p class="c-val"><a href="#">@islam.bouikiri</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ LIGHTBOX ══════════════════════════════════════ -->
+<div class="lightbox" id="lightbox" onclick="lbBackdrop(event)">
+  <button class="lb-close" onclick="lbClose()">&#215;</button>
+  <button class="lb-nav lb-prev" onclick="lbShift(-1)">&#8249;</button>
+  <img id="lb-img" src="" alt="" onclick="event.stopPropagation()" />
+  <button class="lb-nav lb-next" onclick="lbShift(1)">&#8250;</button>
+</div>
+
+
+<!-- ══ FOOTER ════════════════════════════════════════ -->
+<footer>
+  <span class="footer-sig">Islam Bouikiri</span>
+  <span class="footer-copy">&copy; 2026 All rights reserved</span>
+</footer>
+
+
+<script>
+  /* ── IMAGE LIST — auto-updated by generate-manifest.js ── */
+  /* IMAGES-START */
+const GALLERY_IMAGES = ["pictures/DSC05280.jpg","pictures/DSC05922.jpg","pictures/DSC05927.jpg","pictures/DSC06531.jpg","pictures/DSC06727.jpg","pictures/DSC06813.jpg","pictures/DSC06869.jpg","pictures/DSC06892.jpg","pictures/DSC06988.jpg","pictures/DSC07036.jpg","pictures/DSC07074.jpg","pictures/DSC07121.jpg","pictures/DSC07124.jpg","pictures/DSC07222.jpg","pictures/DSC07224.jpg","pictures/DSC07268.jpg","pictures/DSC07273.jpg","pictures/DSC07277.jpg","pictures/DSC07282.jpg","pictures/DSC07791.jpg","pictures/DSC07826.jpg","pictures/DSC07847.jpg","pictures/DSC07859.jpg","pictures/DSC07867.jpg","pictures/DSC07875.jpg","pictures/DSC07895.jpg","pictures/DSC07899.jpg","pictures/DSC07909.jpg","pictures/DSC07913.jpg"];
+/* IMAGES-END */
+
+  /* ── PAGE NAVIGATION ── */
+  function show(id) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.querySelectorAll('.nav-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.page === id);
+    });
+    window.scrollTo({ top: 0, behavior: 'instant' });
+    if (id === 'portfolio' && !window._galleryBuilt) buildGallery();
+  }
+
+  /* ── GALLERY ── */
+  const lbImages = [];
+  let lbCur = 0;
+  window._galleryBuilt = false;
+
+  function buildGallery() {
+    const files = GALLERY_IMAGES;
+    if (!files.length) {
+      document.getElementById('polaroid-grid').innerHTML =
+        '<p style="padding:32px;color:var(--grey-mid);font-size:14px">' +
+        'Run <code style="background:var(--pink);padding:2px 6px;border-radius:3px">' +
+        'node generate-manifest.js</code> to load your photos.</p>';
+      return;
+    }
+
+    lbImages.push(...files);
+    window._galleryBuilt = true;
+    document.getElementById('photo-count').textContent = `${files.length} photographs`;
+
+    const grid = document.getElementById('polaroid-grid');
+
+    files.forEach((filename, i) => {
+      const tilt = (((i * 9301 + 49297) % 233280) / 233280 - 0.5) * 7;
+
+      const slot = document.createElement('div');
+      slot.className = 'p-slot';
+      slot.style.setProperty('--delay', `${i * 50}ms`);
+
+      const card = document.createElement('div');
+      card.className = 'polaroid';
+      card.style.setProperty('--tilt', `${tilt.toFixed(2)}deg`);
+      card.onclick = () => lbOpen(i);
+
+      const img = document.createElement('img');
+      img.src = filename;
+      img.alt = `Photograph ${i + 1}`;
+      img.loading = 'lazy';
+
+      const lbl = document.createElement('div');
+      lbl.className = 'polaroid-label';
+
+      card.append(img, lbl);
+      slot.appendChild(card);
+      grid.appendChild(slot);
+    });
+
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.05, rootMargin: '0px 0px -20px 0px' });
+
+    grid.querySelectorAll('.p-slot').forEach(s => obs.observe(s));
+  }
+
+  /* ── LIGHTBOX ── */
+  function lbOpen(i) {
+    lbCur = i;
+    document.getElementById('lb-img').src = lbImages[i];
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function lbClose() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function lbBackdrop(e) {
+    if (e.target === document.getElementById('lightbox')) lbClose();
+  }
+
+  function lbShift(d) {
+    lbCur = (lbCur + d + lbImages.length) % lbImages.length;
+    const img = document.getElementById('lb-img');
+    img.style.opacity = 0;
+    setTimeout(() => { img.src = lbImages[lbCur]; img.style.opacity = 1; }, 140);
+  }
+
+  document.addEventListener('keydown', e => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'Escape')     lbClose();
+    if (e.key === 'ArrowLeft')  lbShift(-1);
+    if (e.key === 'ArrowRight') lbShift(1);
+  });
+</script>
+
+</body>
+</html>
